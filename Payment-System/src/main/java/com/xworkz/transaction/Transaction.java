@@ -19,7 +19,7 @@ public class Transaction {
             String url = "jdbc:mysql://localhost:3306/payment";
             String username = "root";
             String password = "root";
-            String sqlQuery = "insert into payment_info values(67687390,'Akasha',22,'Savings',600,2026)";
+            String sqlQuery = "insert into payment_info values(67687390,'Akasha',22,'Savings',600,2026),(67687391,'krishna',22,'Savings',200,2026),(67687392,'priya',22,'Savings',800,2026),(67687393,'Devnath',23,'Savings',1600,2026)";
             Connection connect = null;
             Statement statement = null;
 
@@ -37,12 +37,6 @@ public class Transaction {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-            //Third Step: Build statement
-
-
-
-
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
