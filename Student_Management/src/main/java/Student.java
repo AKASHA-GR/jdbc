@@ -13,7 +13,7 @@ public class Student {
             String url = "jdbc:mysql://localhost:3306/Student_DB";
             String user = "root";
             String password = "root";
-            String sqlq = "insert into Student_info values(4eg22cs002,'Akasha',22,'cse',2026)";
+            String sqlq = "insert into Student_info values(002,'Akasha',22,'cse',2026)";
 
             Connection con =  DriverManager.getConnection(url,user,password);
 
