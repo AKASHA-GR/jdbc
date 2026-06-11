@@ -10,6 +10,12 @@ public class Student {
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("The driver loaded successfully.");
 
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+
             String url = "jdbc:mysql://localhost:3306/Student_DB";
             String user = "root";
             String password = "root";
@@ -20,8 +26,6 @@ public class Student {
             Statement statement = con.createStatement();
 
             statement.execute(sqlq);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
