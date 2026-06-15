@@ -8,4 +8,9 @@ public interface PatientDAO {
     boolean update(PatientDTO patientDTO);
 
     boolean delete(PatientDTO patientDTO);
+
+    int insertPatient(String patient_name,int patient_age,String p_diseaseName,String p_admissionDate,String p_dischargeDate);
+
+    PatientDTO selectPatientByAge(int patient_age);
+
 }
