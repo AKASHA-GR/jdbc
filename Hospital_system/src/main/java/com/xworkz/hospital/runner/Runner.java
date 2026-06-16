@@ -1,7 +1,7 @@
 package com.xworkz.hospital.runner;
 
 import com.xworkz.hospital.dao.PatientDAO;
-import com.xworkz.hospital.dao.PatientDAOImpl;
+import com.xworkz.hospital.dao.impl.PatientDAOImpl;
 import com.xworkz.hospital.dto.PatientDTO;
 
 public class Runner {

@@ -1,10 +1,11 @@
-package com.xworkz.hospital.dao;
+package com.xworkz.hospital.dao.impl;
 
+import com.xworkz.hospital.dao.PatientDAO;
 import com.xworkz.hospital.dto.PatientDTO;
 
 import java.sql.*;
 
-public class PatientDAOImpl implements PatientDAO{
+public class PatientDAOImpl implements PatientDAO {
     @Override
     public boolean save(PatientDTO patientDTO) {
         System.out.println("The save the patient details:"+patientDTO);
