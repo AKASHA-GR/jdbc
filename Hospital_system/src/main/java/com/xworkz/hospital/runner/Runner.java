@@ -40,9 +40,21 @@ public class Runner {
 
         int insertPatient = patientDAO.insertPatient("Varun",25,"Head pain","02-8-2025","04-8-2025");
         System.out.println("The patient detailes are inserted:"+insertPatient);
+        System.out.println();
 
         //selectbyage
         PatientDTO patientDTO3 = patientDAO.selectPatientByAge(25);
         System.out.println("Patient details:"+patientDTO3);
+        System.out.println();
+
+        //update by name and age
+        int updateByName = patientDAO.updateByName("Ravi raj",80);
+        System.out.println("The patient details are updating:"+ updateByName);
+        System.out.println();
+
+
+        //delete by name
+        int deleteByName = patientDAO.deleteByName("Mallaya");
+        System.out.println("The patient details are deleted:"+deleteByName);
     }
 }

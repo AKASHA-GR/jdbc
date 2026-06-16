@@ -184,6 +184,101 @@ public class PatientDAOImpl implements PatientDAO{
         return n;
     }
 
+
+
+    @Override
+    public int updateByName(String patient_name, int patient_age) {
+        System.out.println("----update by name---");
+        System.out.println("The name is:"+patient_name+""+"patient_age:"+patient_age);
+        int isUpdate = 0;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("The driver loaded successfully.");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Connection connection = null;
+        String sqlQuery = "UPDATE patient_info set patient_age = ? where patient_name = ?";
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Hospital_db","root","root");
+            System.out.println("The connection is build successfully.");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setInt(1,patient_age);
+            preparedStatement.setString(2,patient_name);
+
+            int check = preparedStatement.executeUpdate();
+            isUpdate = check;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return isUpdate;
+    }
+
+
+
+
+    @Override
+    public int deleteByName(String patient_name) {
+        System.out.println("------Delete by name-----");
+        System.out.println("The name is:"+patient_name);
+
+        int isDelete = 0;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("The driver loaded successfully.");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sqlQuery = "DELETE from patient_info where patient_name = ?";
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Hospital_db","root","root");
+            System.out.println("The connection is build successfully.");
+
+            preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1,patient_name);
+
+            int check = preparedStatement.executeUpdate();
+            isDelete = check;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+
+        return isDelete;
+    }
+
+
+
     @Override
     public PatientDTO selectPatientByAge(int patient_age) {
         System.out.println("The select patient By Age:"+patient_age);
