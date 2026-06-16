@@ -303,7 +303,7 @@ public class PatientDAOImpl implements PatientDAO {
             System.out.println("The connection is build successfully.");
 
             preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1,"patient_age");
+            preparedStatement.setInt(1,patient_age);
             resultSet = preparedStatement.executeQuery();
 
 

@@ -30,5 +30,26 @@ public class Runner {
 
         boolean deleted = taxiDAO.delete(taxiDetailsDTO2);
         System.out.println("The details are deleted:"+deleted);
+
+
+        //insert
+        int isInserted = taxiDAO.insert("vivak","bullera",109,"KA-17-2093",34);
+        System.out.println("The taxi details are inserted:"+isInserted);
+        System.out.println();
+
+        //updated
+        int update = taxiDAO.updateByLicencePlate("KA-17-2093",45);
+        System.out.println("The taxi details are updated:"+update);
+        System.out.println();
+
+        //delete
+        int delete = taxiDAO.deleteByName("vivak");
+        System.out.println("The taxi details are deleted:"+delete);
+        System.out.println();
+
+        //select
+        TaxiDetailsDTO taxiDetailsDTO3 = taxiDAO.select();
+        System.out.println(taxiDetailsDTO3);
+        System.out.println();
     }
 }

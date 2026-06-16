@@ -56,5 +56,9 @@ public class Runner {
         //delete by name
         int deleteByName = patientDAO.deleteByName("Mallaya");
         System.out.println("The patient details are deleted:"+deleteByName);
+
+        //select
+        PatientDTO patientDTO4 = patientDAO.selectPatientByAge(25);
+        System.out.println(patientDTO4);
     }
 }
