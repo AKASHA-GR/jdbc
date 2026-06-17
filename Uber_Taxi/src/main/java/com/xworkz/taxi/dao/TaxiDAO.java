@@ -2,6 +2,8 @@ package com.xworkz.taxi.dao;
 
 import com.xworkz.taxi.dto.TaxiDetailsDTO;
 
+import java.util.List;
+
 public interface TaxiDAO {
     boolean save(TaxiDetailsDTO taxiDetailsDTO);
     boolean update(TaxiDetailsDTO taxiDetailsDTO);
@@ -11,4 +13,6 @@ public interface TaxiDAO {
     int updateByLicencePlate(String licencePlate,int farePerKm);
     int deleteByName(String driverName);
     TaxiDetailsDTO select();
+    List<TaxiDetailsDTO> getTaxiDetails();
+    String batchInsert(List<TaxiDetailsDTO> detailsDTOS);
 }

@@ -4,6 +4,8 @@ import com.xworkz.taxi.dao.TaxiDAO;
 import com.xworkz.taxi.dto.TaxiDetailsDTO;
 
 import java.sql.*;
+import java.util.Collections;
+import java.util.List;
 
 public class TaxiDAOImpl implements TaxiDAO {
     @Override
@@ -317,5 +319,54 @@ public class TaxiDAOImpl implements TaxiDAO {
             }
         }
         return taxiDetailsDTO;
+    }
+
+    @Override
+    public List<TaxiDetailsDTO> getTaxiDetails() {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
+    public String batchInsert(List<TaxiDetailsDTO> detailsDTOS) {
+        System.out.println("The values are inserted:"+detailsDTOS);
+
+        String isInserted = null;
+        Connection connection = null;
+        String sqlQuery = "insert into taxidetails(driverName,carModel,vehicleNo,licencePlate,farePerKM) values(?,?,?,?,?)";
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/taxi_db","root","root");
+            System.out.println("The connection is establish.");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+
+            for(TaxiDetailsDTO ref:detailsDTOS){
+                preparedStatement.setString(1,ref.getDriverName());
+                preparedStatement.setString(2,ref.getCarModel());
+                preparedStatement.setInt(3,ref.getVehicleNo());
+                preparedStatement.setString(4,ref.getLicencePlate());
+                preparedStatement.setDouble(5,ref.getFarePerKM());
+                preparedStatement.addBatch();
+                System.out.println(ref.getDriverName()+"Is inserted.");
+            }
+
+            preparedStatement.executeBatch();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        isInserted = "Data inserted.";
+
+
+        return isInserted;
     }
 }

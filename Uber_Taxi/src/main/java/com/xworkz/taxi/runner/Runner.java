@@ -4,6 +4,9 @@ import com.xworkz.taxi.dao.TaxiDAO;
 import com.xworkz.taxi.dao.impl.TaxiDAOImpl;
 import com.xworkz.taxi.dto.TaxiDetailsDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Runner {
     public static void main(String[] args) {
         TaxiDAO taxiDAO = new TaxiDAOImpl();
@@ -51,5 +54,27 @@ public class Runner {
         TaxiDetailsDTO taxiDetailsDTO3 = taxiDAO.select();
         System.out.println(taxiDetailsDTO3);
         System.out.println();
+
+        //insertMultiple
+        List<TaxiDetailsDTO> taxiDetailsDTOS = new ArrayList<>();
+
+        TaxiDetailsDTO taxiDetailsDTO4 = new TaxiDetailsDTO();
+        taxiDetailsDTO4.setDriverName("Sai");
+        taxiDetailsDTO4.setCarModel("Nano");
+        taxiDetailsDTO4.setVehicleNo(109);
+        taxiDetailsDTO4.setLicencePlate("KA-32-5677");
+        taxiDetailsDTO4.setFarePerKM(30);
+
+        TaxiDetailsDTO taxiDetailsDTO5 = new TaxiDetailsDTO();
+        taxiDetailsDTO5.setDriverName("Prateek");
+        taxiDetailsDTO5.setCarModel("Audi");
+        taxiDetailsDTO5.setVehicleNo(110);
+        taxiDetailsDTO5.setLicencePlate("KA-35-5934");
+        taxiDetailsDTO5.setFarePerKM(300);
+
+        taxiDetailsDTOS.add(taxiDetailsDTO4);
+        taxiDetailsDTOS.add(taxiDetailsDTO5);
+
+        taxiDAO.batchInsert(taxiDetailsDTOS);
     }
 }
