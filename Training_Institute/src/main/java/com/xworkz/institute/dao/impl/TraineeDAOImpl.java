@@ -1,12 +1,10 @@
 package com.xworkz.institute.dao.impl;
 
-import com.mysql.cj.jdbc.Driver;
 import com.xworkz.institute.dao.TraineeDAO;
 import com.xworkz.institute.dto.TraineeDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TraineeDAOImpl implements TraineeDAO {
@@ -48,10 +46,124 @@ public class TraineeDAOImpl implements TraineeDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
         isInserted = "Data inserted.";
 
         return isInserted;
     }
+
+
+
+
+    @Override
+    public String batchUpdate(List<TraineeDTO> traineeDTOS) {
+        System.out.println("The values are the updated:"+traineeDTOS);
+
+        String isUpdated = null;
+        Connection connection = null;
+        String sqlQuery1 = "UPDATE trainee_info set trainee_email = ? where trainee_id = ?";
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("The driver is loaded successfully.");
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/institute_db","root","root");
+            System.out.println("The connection is established.");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery1);
+
+            for(TraineeDTO ref:traineeDTOS){
+                preparedStatement.setInt(2,ref.getTrainee_id());
+                preparedStatement.setString(1,ref.getTrainee_email());
+
+                preparedStatement.addBatch();
+                System.out.println("Id "+ref.getTrainee_id()+" is updated.");
+            }
+
+            preparedStatement.executeBatch();
+
+
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        isUpdated = "Data updated.";
+
+        return isUpdated;
+    }
+
+
+
+
+    @Override
+    public String batchDelete(List<TraineeDTO> traineeDTOS) {
+        System.out.println("The values are the deleted:"+traineeDTOS);
+
+        String isDeleted = null;
+        Connection connection = null;
+        String sqlQuery1 = "DELETE FROM trainee_info WHERE trainee_id = ?";
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("The driver is loaded successfully.");
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/institute_db","root","root");
+            System.out.println("The connection is established.");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery1);
+
+            for(TraineeDTO ref:traineeDTOS){
+                preparedStatement.setInt(1,ref.getTrainee_id());
+
+                preparedStatement.addBatch();
+                System.out.println("Id "+ref.getTrainee_id()+" is Deleted.");
+            }
+
+            preparedStatement.executeBatch();
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        isDeleted = "Data updated.";
+
+        return isDeleted;
+    }
+
+
+
+
 
     @Override
     public List<TraineeDTO> getTraineeList() {
@@ -94,6 +206,15 @@ public class TraineeDAOImpl implements TraineeDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        finally {
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         return arrayList;
     }

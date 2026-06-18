@@ -48,5 +48,26 @@ public class TraineeRunner {
 
         traineeDAO.batchInsert(traineeDTOList);
 
+
+        List<TraineeDTO> traineeDTOS = new ArrayList<>();
+
+        TraineeDTO traineeDTO3 = new TraineeDTO();
+        traineeDTO3.setTrainee_id(1);
+        traineeDTO3.setTrainee_email("akash@gmail.com");
+
+        TraineeDTO traineeDTO4 = new TraineeDTO();
+        traineeDTO4.setTrainee_id(2);
+        traineeDTO4.setTrainee_email("krishna@gmail.com");
+
+        TraineeDTO traineeDTO5 = new TraineeDTO();
+        traineeDTO5.setTrainee_id(3);
+        traineeDTO5.setTrainee_email("prateek@gmail.com");
+
+        traineeDTOS.add(traineeDTO3);
+        traineeDTOS.add(traineeDTO4);
+        traineeDTOS.add(traineeDTO5);
+
+        traineeDAO.batchUpdate(traineeDTOS);
+
     }
 }
