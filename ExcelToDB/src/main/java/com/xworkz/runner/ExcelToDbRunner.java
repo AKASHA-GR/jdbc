@@ -11,7 +11,7 @@ public class ExcelToDbRunner {
         ExcelToDbDAO dao = new ExcelToDbDAOImpl();
 
         List<ExcelToDbDTO> list =
-                dao.readExcel("software.xlsx");
+                dao.readExcel("E:\\jdbc\\ExcelToDB\\software.xlsx");
 
         for (ExcelToDbDTO dto : list) {
             System.out.println(dto);

@@ -19,7 +19,7 @@ public class ExcelToDbDAOImpl implements ExcelToDbDAO {
         List<ExcelToDbDTO> list = new ArrayList<>();
 
         try {
-            FileInputStream fis = new FileInputStream("software.xlsx");
+            FileInputStream fis = new FileInputStream("E:\\jdbc\\ExcelToDB\\software.xlsx");
 
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
