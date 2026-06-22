@@ -36,7 +36,7 @@ public class ExcelToDbDAOImpl implements ExcelToDbDAO {
                 double current_version = row.getCell(2).getNumericCellValue();
                 int developed_year = (int) row.getCell(3).getNumericCellValue();
                 String developed_by = row.getCell(4).getStringCellValue();
-                String open_source = row.getCell(4).getStringCellValue();
+                String open_source = row.getCell(5).getStringCellValue();
 
                 ExcelToDbDTO dto = new ExcelToDbDTO(id, software,current_version, developed_year, developed_by, open_source);
 
